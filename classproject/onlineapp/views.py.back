@@ -1,0 +1,36 @@
+from . import templates
+from django.shortcuts import render
+from django.http import HttpResponse
+from .models import *
+
+#Create your views here.
+
+def hello(request):
+    return HttpResponse("<h1>Hello world</h1>")
+
+#def home(request):
+    #return render(request, 'onlineaphome.html')
+
+def getmycollege(request):
+    c = College.objects.values('name', 'acronym').filter(acronym = 'gvp')
+    return HttpResponse(c[0]['acronym'])
+
+def getallcolleges(request):
+
+    """ table = "<html><head></head><body><table border=1><tr><th>Acronym</th><th>College</th></tr>"
+    c = College.objects.values('name', 'acronym')
+    for i in c:
+        table += "<tr><td>"+i['acronym'] + "</td><td>" + i['name'] + "</td></tr>"
+    table += "</table></body></html>"
+    return HttpResponse(table)
+    """
+    colleges = College.objects.values('name', 'acronym')
+    return render(request, 'getallcolleges.html', {'colleges' : colleges})
+
+def colleges(request):
+    collegesList = College.objects.values('name', 'acronym', 'id')
+    return render(request, 'colleges.html', {'colleges' : collegesList})
+
+def collegestudentinfo(request, id):
+    studentDetails = Student.objects.values('name', 'college__name', 'mocktest1__total').filter(college__id = id)
+    return render(request, 'collegestudentinfo.html', {'studentDetails': studentDetails})

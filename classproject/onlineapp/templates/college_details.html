@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<br/>
+ <div class="container is-fluid box">
+        {% if 'onlineapp.add_student' in user_permissions %}
+            <a class='button is-primary is-small is-outlined' href="{% url 'add_student' college.id %}">Add Student</a>
+        {% endif %}
+        <center><h1><strong>{{ title }}</strong></h1></center>
+         <center>
+            <table class = "table is-hoverable is-striped is-fullwidth">
+         <thead>
+        <tr>
+            <th>Student</th>
+            <th>Email</th>
+            <th>Marks</th>
+            {% if 'onlineapp.change_student' in user_permissions or 'onlineapp.delete_student' in user_permissions %}
+            <th>Action</th>
+            {% endif %}
+        </tr>
+        </thead>
+         <tbody>
+        {% for student in studentDetails %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.mocktest1__total }}</td>
+            <td>{% if 'onlineapp.change_student' in user_permissions %}
+                <a href="{% url 'edit_student' college.id student.id %}">edit</a>
+                {% endif %}
+                {% if 'onlineapp.delete_student' in user_permissions %}
+                <a href="{% url 'delete_student' college.id student.id %}">delete</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+         </tbody>
+     </table>
+         </center>
+ </div>
+{% endblock content %}

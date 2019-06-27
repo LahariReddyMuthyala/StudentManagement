@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if messages %}
+<ul class="messages">
+     {% for message in messages %}
+    <div class="notification is-primary">
+  <button class="delete"></button>{{ message }}
+</div>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<br/>
+<center><h1><strong>{{ title }}</strong></h1></center>
+<br/>
+ <div class="container box" style="width:30%">
+<form method="POST">
+    <center>
+    {% csrf_token %}
+        <div class="field">
+            <div class="control is-primary">
+                {{ form.username }}
+            </div>
+        </div>
+     <div class="field">
+        <div class="control is-primary">
+            {{ form.password }}
+        </div>
+    </div>
+    <input class="button is-primary" type="submit" value="SUBMIT">
+
+    </center>
+</form>
+<center><small><a href = "{% url 'signup' %}">SIGNUP</a></small></center>
+ </div>
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.css' %}">
+    <style>
+
+    </style>
+</head>
+<body>
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand navbar-item">
+   <a class="button is-primary is-inverted is-outlined" href="{% url 'colleges_html' %}">
+       <strong>Mission RND</strong>
+   </a>
+  </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+            {% if logged_in == False %}
+          <a class="button is-primary is-inverted is-outlined" href="{% url 'signup' %}">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-primary is-inverted is-outlined" href="{% url 'login' %}">
+            Log in
+          </a>
+            {% endif %}
+            {% if logged_in == True %}
+            <a class="button is-primary is-inverted is-outlined" href="{% url 'logout' %}">
+            <strong>Logout</strong>
+            </a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+</nav>
+{% block content %}
+{% endblock content %}
+</body>
+</html>

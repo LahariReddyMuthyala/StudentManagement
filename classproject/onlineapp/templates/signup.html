@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<br/>
+<center><h1><strong>{{ title }}</strong></h1></center>
+<br/>
+ <div class="container box" style="width:30%">
+<form method="POST">
+    <center>
+    {% csrf_token %}
+
+        <div class="field">
+            <div class="control is-primary">
+                {{ form.firstname }}
+            </div>
+        </div>
+     <div class="field">
+        <div class="control is-primary">
+            {{ form.lastname }}
+        </div>
+     </div>
+        <div class="field">
+            <div class="control is-primary">
+                {{ form.username }}
+            </div>
+        </div>
+     <div class="field">
+        <div class="control is-primary">
+            {{ form.password }}
+        </div>
+    </div>
+    <input class="button is-primary" type="submit" value="SUBMIT">
+    </center>
+</form>
+ </div>
+{% endblock content %}
